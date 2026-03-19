@@ -9,7 +9,7 @@ function App() {
   const [facts, setFacts] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [blueprintOpen, setBlueprintOpen] = useState(false);
-  const [usedBlueprint, setUsedBlueprint] = useState(false);
+  const [turnFailed, setTurnFailed] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [masteryOpen, setMasteryOpen] = useState(false);
@@ -22,7 +22,7 @@ function App() {
 
   const handleOpenBlueprint = () => {
     setBlueprintOpen(true);
-    setUsedBlueprint(true);
+    setTurnFailed(true);
     setErrorMsg('');
   };
 
@@ -33,22 +33,23 @@ function App() {
     
     if (isCorrect) {
       setErrorMsg('');
-      const newFacts = submitAnswer(facts, currentQuestion.fact.id, true, usedBlueprint);
+      const newFacts = submitAnswer(facts, currentQuestion.fact.id, true, turnFailed);
       setFacts(newFacts);
       
       // Celebrate
       setCelebrating(true);
       setTimeout(() => {
         setCelebrating(false);
-        setUsedBlueprint(false);
+        setTurnFailed(false);
         setBlueprintOpen(false);
         setCurrentQuestion(getNextQuestion(newFacts));
       }, 2000);
       
     } else {
       // Wrong answer
-      const newFacts = submitAnswer(facts, currentQuestion.fact.id, false, usedBlueprint);
+      const newFacts = submitAnswer(facts, currentQuestion.fact.id, false, turnFailed);
       setFacts(newFacts);
+      setTurnFailed(true);
       setErrorMsg("Not quite! We need exactly the right number.");
     }
   };

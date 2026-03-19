@@ -85,14 +85,14 @@ export function getNextQuestion(facts) {
   }
 }
 
-export function submitAnswer(facts, factId, isCorrect, usedBlueprint) {
+export function submitAnswer(facts, factId, isCorrect, turnFailed) {
   const factIndex = facts.findIndex(f => f.id === factId);
   if (factIndex === -1) return facts;
   
   const fact = {...facts[factIndex]}; // copy to avoid direct mutation
   fact.hasBeenSeen = true;
 
-  if (!isCorrect || usedBlueprint) {
+  if (!isCorrect || turnFailed) {
     fact.masteryLevel = 0;
     // Review again soon
     fact.nextReviewDate = Date.now(); 
