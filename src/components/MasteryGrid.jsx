@@ -32,7 +32,7 @@ export default function MasteryGrid({ facts, onClose }) {
       cols.push(
         <div 
           key={`${r}x${c}`} 
-          className={`w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 flex items-center justify-center text-xs sm:text-sm md:text-lg rounded-[2px] cursor-help transition-all hover:scale-110 hover:z-10 ${getLevelStyle(level, seen)}`}
+          className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 flex items-center justify-center text-[10px] sm:text-xs md:text-sm rounded-[2px] cursor-help transition-all hover:scale-110 hover:z-10 ${getLevelStyle(level, seen)}`}
           title={title}
         >
           {r * c}
@@ -43,11 +43,12 @@ export default function MasteryGrid({ facts, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-white p-6 md:p-10 rounded-3xl shadow-2xl flex flex-col items-center animate-in zoom-in-95 duration-200">
-        <h2 className="text-2xl md:text-4xl font-black text-blue-900 mb-6 uppercase tracking-wider text-center">
-          Mastery Matrix
-        </h2>
+    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm overflow-y-auto">
+      <div className="flex min-h-full items-center justify-center p-4 sm:p-6 md:p-8">
+        <div className="bg-white p-5 sm:p-6 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center animate-in zoom-in-95 duration-200">
+          <h2 className="text-2xl md:text-3xl font-black text-blue-900 mb-4 uppercase tracking-wider text-center">
+            Mastery Matrix
+          </h2>
         
         <div className="flex flex-col gap-[2px] bg-gray-200 p-2 md:p-3 rounded-2xl border-4 border-gray-300 shadow-inner">
           {rows}
@@ -76,10 +77,11 @@ export default function MasteryGrid({ facts, onClose }) {
 
         <button 
           onClick={onClose}
-          className="mt-10 px-10 py-4 bg-sky-500 text-white font-black text-xl rounded-full hover:bg-sky-400 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all shadow-lg"
+          className="mt-6 px-8 py-3 bg-sky-500 text-white font-black text-lg rounded-full hover:bg-sky-400 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all shadow-lg"
         >
           Close Grid
         </button>
+        </div>
       </div>
     </div>
   );

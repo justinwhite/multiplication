@@ -36,7 +36,7 @@ export default function Blueprint({ onClose }) {
       cols.push(
         <div
           key={`${r}x${c}`}
-          className={`w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 rounded-[2px] cursor-pointer select-none transition-all duration-75 ${isHighlighted ? highlightStyle : defaultStyle}`}
+          className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-[2px] cursor-pointer select-none transition-all duration-75 ${isHighlighted ? highlightStyle : defaultStyle}`}
           onMouseDown={() => handleClick(r, c)}
           onMouseEnter={() => handleMouseEnter(r, c)}
         ></div>
@@ -56,25 +56,27 @@ export default function Blueprint({ onClose }) {
   const highlightDesc = area > 0 ? `${w} x ${h} = ${area} bricks` : instruction;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-      <div className="flex flex-col items-center bg-blue-900/95 p-6 md:p-10 rounded-3xl shadow-2xl border-[4px] border-yellow-400 animate-in zoom-in-95 duration-200">
-        <h2 className="text-2xl md:text-4xl font-black text-white mb-2 tracking-wide uppercase text-center">The Blueprint</h2>
-        <p className="text-yellow-300 font-bold mb-2 text-lg md:text-xl h-8">{highlightDesc}</p>
-        <p className="text-blue-300 font-bold mb-4 text-sm md:text-base h-6">{area === 0 ? '' : (lockedArea ? 'Locked!' : 'Hovering...')}</p>
-        
-        <div 
-          className="flex flex-col gap-[2px] bg-blue-950 p-2 md:p-3 rounded-2xl border-4 border-blue-900 shadow-inner cursor-pointer"
-          onMouseLeave={() => { if(!lockedArea) setHoverArea(null); }}
-        >
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="flex min-h-full items-center justify-center p-4 sm:p-6 md:p-8">
+        <div className="flex flex-col items-center bg-blue-900/95 p-5 sm:p-6 md:p-8 rounded-3xl shadow-2xl border-[4px] border-yellow-400 animate-in zoom-in-95 duration-200">
+          <h2 className="text-2xl md:text-3xl font-black text-white mb-1 tracking-wide uppercase text-center">The Blueprint</h2>
+          <p className="text-yellow-300 font-bold mb-1 text-lg sm:text-xl h-7">{highlightDesc}</p>
+          <p className="text-blue-300 font-bold mb-3 text-xs sm:text-sm h-5">{area === 0 ? '' : (lockedArea ? 'Locked!' : 'Hovering...')}</p>
+          
+          <div 
+            className="flex flex-col gap-[2px] bg-blue-950 p-2 md:p-3 rounded-2xl border-4 border-blue-900 shadow-inner cursor-pointer"
+            onMouseLeave={() => { if(!lockedArea) setHoverArea(null); }}
+          >
           {rows}
         </div>
         
         <button 
           onClick={onClose}
-          className="mt-8 px-8 md:px-10 py-3 md:py-4 bg-yellow-400 text-blue-900 font-black text-lg md:text-xl rounded-full hover:bg-yellow-300 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all shadow-lg"
+          className="mt-5 px-6 md:px-8 py-2 md:py-3 bg-yellow-400 text-blue-900 font-black text-base md:text-lg rounded-full hover:bg-yellow-300 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all shadow-lg"
         >
           Back to Question
         </button>
+        </div>
       </div>
     </div>
   );
