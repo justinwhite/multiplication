@@ -31,10 +31,13 @@ export default function QuestionCard({ fact, mode, onSubmit, onOpenBlueprint }) 
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           value={inputVal}
-          onChange={e => setInputVal(e.target.value)}
-          className={`text-center text-5xl font-black p-4 rounded-xl border-4 ${inputBorder} focus:outline-none focus:ring-4 ${inputFocus} transition-all shadow-inner`}
+          onChange={e => setInputVal(e.target.value.replace(/[^0-9]/g, ''))}
+          maxLength={3}
+          className={`w-48 sm:w-56 mx-auto text-center text-6xl font-black py-4 px-2 rounded-xl border-4 ${inputBorder} focus:outline-none focus:ring-4 ${inputFocus} transition-all shadow-inner`}
           placeholder="?"
           autoFocus
         />
