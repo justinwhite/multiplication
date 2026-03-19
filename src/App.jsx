@@ -85,20 +85,18 @@ function App() {
             </div>
           )}
 
-          {blueprintOpen ? (
-            <div className="w-full animate-in fade-in zoom-in duration-300">
-              <Blueprint onClose={() => setBlueprintOpen(false)} fact={fact} />
-            </div>
-          ) : (
-            <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-500">
-              <QuestionCard 
-                fact={fact} 
-                mode={mode}
-                onSubmit={handleSubmit}
-                onOpenBlueprint={handleOpenBlueprint}
-              />
-            </div>
+          {blueprintOpen && (
+            <Blueprint onClose={() => setBlueprintOpen(false)} />
           )}
+
+          <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-500">
+            <QuestionCard 
+              fact={fact} 
+              mode={mode}
+              onSubmit={handleSubmit}
+              onOpenBlueprint={handleOpenBlueprint}
+            />
+          </div>
 
           {isRage && !blueprintOpen && (
             <div className="mt-8 text-red-200 font-bold uppercase tracking-widest text-xl animate-pulse flex items-center gap-2">

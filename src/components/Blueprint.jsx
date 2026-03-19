@@ -51,8 +51,9 @@ export default function Blueprint({ onClose }) {
   const highlightDesc = area > 0 ? `${w} x ${h} = ${area}` : 'Drag to measure area';
 
   return (
-    <div className="flex flex-col items-center bg-blue-900/90 backdrop-blur-md p-6 rounded-3xl shadow-2xl border-4 border-yellow-400">
-      <h2 className="text-2xl font-black text-white mb-2 tracking-wide uppercase">The Blueprint</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="flex flex-col items-center bg-blue-900/95 p-6 md:p-8 rounded-3xl shadow-2xl border-[4px] border-yellow-400 animate-in zoom-in-95 duration-200">
+        <h2 className="text-2xl font-black text-white mb-2 tracking-wide uppercase">The Blueprint</h2>
       <p className="text-yellow-300 font-bold mb-4 text-xl h-8">{highlightDesc}</p>
       
       <div 
@@ -68,6 +69,7 @@ export default function Blueprint({ onClose }) {
       >
         Back to Question
       </button>
+      </div>
     </div>
   );
 }
