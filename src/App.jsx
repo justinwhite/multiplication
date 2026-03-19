@@ -3,6 +3,7 @@ import { getFacts, getNextQuestion, submitAnswer } from './lib/engine';
 import Character from './components/Character';
 import QuestionCard from './components/QuestionCard';
 import Blueprint from './components/Blueprint';
+import MasteryGrid from './components/MasteryGrid';
 
 function App() {
   const [facts, setFacts] = useState([]);
@@ -11,6 +12,7 @@ function App() {
   const [usedBlueprint, setUsedBlueprint] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [masteryOpen, setMasteryOpen] = useState(false);
 
   useEffect(() => {
     const loadedFacts = getFacts();
@@ -105,10 +107,18 @@ function App() {
           )}
         </div>
       )}
+
+      {masteryOpen && (
+        <MasteryGrid facts={facts} onClose={() => setMasteryOpen(false)} />
+      )}
       
       {/* Subtle Mastery Indicator for Parents */}
-      <div className="fixed bottom-3 right-4 text-white/40 text-sm font-semibold tracking-wider pointer-events-none z-50 select-none">
-        MASTERY: {fact.masteryLevel}/5
+      <div 
+        onClick={() => setMasteryOpen(true)}
+        className="fixed bottom-4 right-4 text-white/40 hover:text-white/90 transition-all text-xs font-bold tracking-widest cursor-pointer z-[40] select-none bg-black/10 hover:bg-black/30 px-3 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2 group"
+      >
+        <span>MASTERY: {fact.masteryLevel}/5</span>
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity">👁️ Grid</span>
       </div>
     </div>
   );
