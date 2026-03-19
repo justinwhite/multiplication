@@ -62,7 +62,7 @@ function App() {
         setTurnFailed(false);
         setBlueprintOpen(false);
         setCurrentQuestion(getNextQuestion(newFacts));
-      }, 2000);
+      }, 1200);
       
     } else {
       // Wrong answer
