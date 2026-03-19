@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 export default function QuestionCard({ fact, mode, onSubmit, onOpenBlueprint }) {
   const [inputVal, setInputVal] = useState('');
+  const promptIndex = useMemo(() => Math.floor(Math.random() * 5), [fact.id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,10 +24,20 @@ export default function QuestionCard({ fact, mode, onSubmit, onOpenBlueprint }) 
       <h2 className="text-3xl font-black mb-6 tracking-tight">
         {isRage ? "I NEED BRICKS NOW!" : "Dance Floor Planners!"}
       </h2>
-      <p className="text-xl font-bold mb-8 leading-relaxed">
-        We have <span className={`inline-block px-3 py-1 mx-1 rounded-lg shadow-sm ${isRage ? 'bg-red-800 text-yellow-300' : 'bg-blue-100 text-blue-700'}`}>
-          {fact.a} x {fact.b}
-        </span> dancers coming! How many bricks do we need?
+      <p className="text-xl md:text-2xl font-bold mb-8 leading-relaxed">
+        {(() => {
+          const hl = <span className={`inline-block px-3 py-1 mx-1 tracking-wider rounded-lg shadow-sm ${isRage ? 'bg-red-800 text-yellow-300' : 'bg-blue-100 text-blue-700'}`}>
+            {fact.a} x {fact.b}
+          </span>;
+          switch(promptIndex) {
+            case 0: return <>We have {hl} dancers coming! How many people will be on the dance floor?</>;
+            case 1: return <>A big party of {hl} dancers is here! How many people are on the dance floor?</>;
+            case 2: return <>Get ready! {hl} dancers are arriving. How many people are on the dance floor?</>;
+            case 3: return <>The DJ is playing music for {hl} dancers! How many people are on the dance floor?</>;
+            case 4: return <>{hl} amazing dancers want to party! How many people will be on the dance floor?</>;
+            default: return null;
+          }
+        })()}
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
