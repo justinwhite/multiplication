@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Character({ mode }) {
+export default function Character({ mode, isFrowning }) {
   const isRage = mode === 'Rage';
   
   // Base colors
@@ -102,10 +102,14 @@ export default function Character({ mode }) {
 
                {/* Pink Nose & Tongue */}
                <div className="absolute bottom-[2px] left-1/2 -translate-x-1/2 flex flex-col items-center">
-                 <div className="w-[20px] h-[10px] bg-[#e24c9c] rounded-full mb-[2px] shadow-sm"></div>
-                 <div className="w-10 h-5 bg-[#3b1216] rounded-b-full overflow-hidden flex justify-center items-end border-t border-[#3b1216]">
-                    <div className="w-6 h-3 bg-[#f25287] rounded-t-full mt-[1px]"></div>
-                 </div>
+                 <div className="w-[20px] h-[10px] bg-[#e24c9c] rounded-full mb-[2px] shadow-sm transition-all duration-300"></div>
+                 {isFrowning ? (
+                   <div className="w-8 h-4 border-t-4 border-[#3b1216] mt-[6px] rounded-t-[20px] opacity-80 transition-all duration-300"></div>
+                 ) : (
+                   <div className="w-10 h-5 bg-[#3b1216] rounded-b-full overflow-hidden flex justify-center items-end border-t border-[#3b1216] transition-all duration-300">
+                      <div className="w-6 h-3 bg-[#f25287] rounded-t-full mt-[1px]"></div>
+                   </div>
+                 )}
                </div>
              </div>
            )}

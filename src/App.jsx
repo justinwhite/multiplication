@@ -28,6 +28,16 @@ function App() {
     setCurrentQuestion(getNextQuestion(loadedFacts));
   }, []);
 
+  useEffect(() => {
+    let timeout;
+    if (errorMsg) {
+      timeout = setTimeout(() => {
+        setErrorMsg('');
+      }, 5000);
+    }
+    return () => clearTimeout(timeout);
+  }, [errorMsg]);
+
   const handleOpenBlueprint = () => {
     setBlueprintOpen(true);
     setTurnFailed(true);
@@ -88,13 +98,15 @@ function App() {
         </div>
       )}
       <div className="max-w-md w-full flex flex-col items-center">
-          <Character mode={mode} />
+          <Character mode={mode} isFrowning={!!errorMsg} />
           
-          {errorMsg && (
-            <div className="mb-4 bg-red-500 text-white px-6 py-2 rounded-full font-bold shadow-lg animate-bounce">
-              {errorMsg}
-            </div>
-          )}
+          <div className="relative w-full flex justify-center z-20">
+            {errorMsg && (
+              <div className="absolute top-0 -mt-2 bg-red-500 text-white px-6 py-2 rounded-full font-bold shadow-lg animate-bounce text-center">
+                {errorMsg}
+              </div>
+            )}
+          </div>
 
           {blueprintOpen && (
             <Blueprint onClose={() => setBlueprintOpen(false)} />
