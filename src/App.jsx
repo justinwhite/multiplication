@@ -11,8 +11,16 @@ function App() {
   const [blueprintOpen, setBlueprintOpen] = useState(false);
   const [turnFailed, setTurnFailed] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
+  const [celebMsg, setCelebMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [masteryOpen, setMasteryOpen] = useState(false);
+
+  const celebMessages = [
+    "The dance floor is packed!",
+    "Time to Party!",
+    "Let's Dance!",
+    "The dancers are ready!"
+  ];
 
   useEffect(() => {
     const loadedFacts = getFacts();
@@ -37,6 +45,7 @@ function App() {
       setFacts(newFacts);
       
       // Celebrate
+      setCelebMsg(celebMessages[Math.floor(Math.random() * celebMessages.length)]);
       setCelebrating(true);
       setTimeout(() => {
         setCelebrating(false);
@@ -66,18 +75,19 @@ function App() {
 
   return (
     <div className={`min-h-[100dvh] w-full transition-colors duration-700 flex flex-col items-center justify-center p-4 ${bgClass} ${patternClass}`}>
-      {celebrating ? (
-        <div className="flex justify-center items-center flex-col animate-[bounce_1s_infinite]">
-          <h1 className="text-5xl md:text-7xl font-black text-white drop-shadow-xl text-center px-4 leading-tight mb-12">
-            PERFECT! <br/>
-            <span className="text-3xl md:text-5xl text-yellow-300 block mt-4">Dance floor built!</span>
-          </h1>
-          <div className="w-48 h-48 md:w-64 md:h-64 bg-yellow-400 rounded-full flex items-center justify-center shadow-[0_0_100px_rgba(250,204,21,0.8)]">
-            <span className="text-7xl md:text-9xl relative z-10 animate-spin" style={{ animationDuration: '3s' }}>🕺</span>
-          </div>
+      {/* Celebration Overlay */}
+      {celebrating && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-green-500/90 backdrop-blur-sm animate-in fade-in zoom-in duration-300">
+          <div className="text-6xl md:text-8xl mb-4 animate-bounce">🎉</div>
+          <h2 className="text-5xl md:text-7xl font-black text-white px-4 text-center tracking-tight drop-shadow-xl">
+            PERFECT!
+          </h2>
+          <p className="text-2xl md:text-4xl font-bold text-green-100 mt-4 tracking-wide shadow-sm text-center">
+            {celebMsg}
+          </p>
         </div>
-      ) : (
-        <div className="max-w-md w-full flex flex-col items-center">
+      )}
+      <div className="max-w-md w-full flex flex-col items-center">
           <Character mode={mode} />
           
           {errorMsg && (
@@ -105,7 +115,6 @@ function App() {
             </div>
           )}
         </div>
-      )}
 
       {masteryOpen && (
         <MasteryGrid facts={facts} onClose={() => setMasteryOpen(false)} />
