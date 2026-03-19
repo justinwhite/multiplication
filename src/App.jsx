@@ -105,6 +105,11 @@ function App() {
           )}
         </div>
       )}
+      
+      {/* Subtle Mastery Indicator for Parents */}
+      <div className="fixed bottom-3 right-4 text-white/40 text-sm font-semibold tracking-wider pointer-events-none z-50 select-none">
+        MASTERY: {fact.masteryLevel}/5
+      </div>
     </div>
   );
 }
